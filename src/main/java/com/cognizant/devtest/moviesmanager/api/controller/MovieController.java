@@ -35,29 +35,6 @@ private MovieRepository movieRepository;
         return movieRepository.findById(newMovie.getId()).orElseThrow(() -> new Exception("movie not found"));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, produces = "application/json")
-    public Movie modifyMovie(@RequestBody Movie movie) throws Exception {
-
-        Movie modifiedMovie = movieRepository.save(movie);
-
-        return movieRepository.findById(modifiedMovie.getId()).orElseThrow(() -> new Exception("movie not found"));
-    }
-
-    @RequestMapping(value = "{id}", method = RequestMethod.GET, produces = "application/json")
-    public Movie getMovieById(@PathVariable("id") final Long id) throws Exception {
-
-        Movie movie = movieRepository.findById(id).orElseThrow(() -> new Exception("movie not found"));
-
-        return movie;
-    }
-
-    @RequestMapping(value = "{id}", method = RequestMethod.DELETE, produces = "application/json")
-    public ResponseEntity<Void> deleteMovieById(@PathVariable("id") final Long id) throws Exception {
-
-        movieRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public List<Movie> getAllMovies() {
